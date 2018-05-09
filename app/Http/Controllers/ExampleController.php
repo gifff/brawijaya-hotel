@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Room;
+use App\RoomType;
 
 class ExampleController extends Controller
 {
@@ -17,6 +19,20 @@ class ExampleController extends Controller
     }
 
     //
+
+    public function allRooms()
+    {
+        $rooms = Room::all();
+        $returned_rooms = [];
+        foreach($rooms as $room) {
+            $returned_rooms[] = [
+                'name' => $room->name,
+                'type' => $room->type->name,
+                'price' => $room->type->price
+            ];
+        }
+        return response()->json($returned_rooms);
+    }
 
     public function showVersion(Request $request)
     {

@@ -12,3 +12,4 @@
 */
 
 $router->get('/', 'ExampleController@showVersion');
+$router->get('/rooms', 'ExampleController@allRooms');
