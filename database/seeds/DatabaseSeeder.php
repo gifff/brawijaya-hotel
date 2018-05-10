@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Deluxe',
             'price' => 600000
         ]);
-        // $this->call('UsersTableSeeder');
         $this->call('RoomsTableSeeder');
+        $this->call('ReservationsTableSeeder');
     }
 }

@@ -19,6 +19,8 @@ class CreateRoomsTable extends Migration
             // Schema declaration
             $table->string('name', 32)->nullable(false);
             $table->unsignedInteger('type_id');
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
 
             // Constraints declaration
             $table->unique('name');

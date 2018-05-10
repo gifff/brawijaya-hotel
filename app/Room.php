@@ -19,4 +19,10 @@ class Room extends Model {
         return $this->belongsTo('App\RoomType', 'type_id');
     }
 
+    public function reservations() {
+        return $this->belongsToMany('App\Reservation')
+            ->withPivot('extra_bed')
+            ->withTimestamps();
+    }
+
 }

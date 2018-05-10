@@ -8,6 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -45,6 +46,45 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        return parent::render($request, $e);
+        $debug = env('APP_DEBUG', false);
+        if ($e instanceof ValidationException) {
+            $messges = [];
+            foreach ($e->errors() as $field => $message)
+            {
+                $messages[] = [
+                    'field' => $field,
+                    'message' => $message[0]
+                ];
+            }
+            return response()->json([
+                'errors' => $messages
+            ], 400);
+        }
+        if ($e instanceof HttpException && !!$debug) {
+            $result = json_decode($e->getMessage());
+            if (json_last_error() === JSON_ERROR_NONE) {
+                return response()->json([
+                    'errors' => [ $result ]
+                ], $e->getStatusCode());
+            }
+
+            return response()->json([
+                'errors' => [ 
+                    [
+                        'message' => $e->getMessage()
+                    ]
+                ]
+            ], $e->getStatusCode());
+        }
+        if ($debug) {
+            return parent::render($request, $e);
+        }
+        return response()->json([
+            'errors' => [ 
+                [
+                    'message' => $e->getMessage()
+                ]
+            ]
+        ], 500);
     }
 }

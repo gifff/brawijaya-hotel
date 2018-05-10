@@ -13,3 +13,10 @@
 
 $router->get('/', 'ExampleController@showVersion');
 $router->get('/rooms', 'ExampleController@allRooms');
+$router->get('/test', 'ExampleController@testNotFound');
+
+$router->group(['prefix' => 'reservations'], function () use ($router) {
+  $router->get('/', 'ReservationController@fetchAll');
+  $router->post('/', 'ReservationController@create');
+  
+});

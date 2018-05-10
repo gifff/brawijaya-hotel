@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Room;
 use App\RoomType;
+use App\Reservation;
 
 class ExampleController extends Controller
 {
@@ -19,6 +20,16 @@ class ExampleController extends Controller
     }
 
     //
+
+    public function testNotFound() 
+    {
+        abort(401, 'Sorry not existing');
+    }
+
+    public function allReservations()
+    {
+
+    }
 
     public function allRooms()
     {

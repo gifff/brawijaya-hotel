@@ -13,6 +13,8 @@ class CreateRoomTypesTable extends Migration
             // Schema declaration
             $table->string('name', 32)->nullable(false);
             $table->integer('price')->nullable(false)->default(0);
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
             // Constraints declaration
             $table->unique('name');
         });
