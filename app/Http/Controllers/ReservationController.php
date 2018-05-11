@@ -17,7 +17,47 @@ class ReservationController extends Controller
    * @return void
    */
   public function __construct() {
+    $this->holidays = [
+      [ "date" => 1514764800, "title" => "Tahun Baru Masehi" ],
+      [ "date" => 1518739200, "title" => "Tahun Baru Imlek" ],
+      [ "date" => 1521244800, "title" => "Hari Raya Nyepi" ],
+      [ "date" => 1522368000, "title" => "Jumat Agung" ],
+      [ "date" => 1523664000, "title" => "Isra Mi'raj" ],
+      [ "date" => 1525132800, "title" => "Hari Buruh" ],
+      [ "date" => 1525910400, "title" => "Kenaikan Isa Almasih" ],
+      [ "date" => 1527552000, "title" => "Hari Waisak" ],
+      [ "date" => 1527811200, "title" => "Hari Kesaktian Pancasila" ],
+      [ "date" => 1528675200, "title" => "Cuti Bersama Lebaran" ],
+      [ "date" => 1528761600, "title" => "Cuti Bersama Lebaran" ],
+      [ "date" => 1528848000, "title" => "Cuti Bersama Lebaran" ],
+      [ "date" => 1528934400, "title" => "Cuti Bersama Lebaran" ],
+      [ "date" => 1529020800, "title" => "Hari Raya Idul Fitri" ],
+      [ "date" => 1529280000, "title" => "Cuti Bersama Lebaran" ],
+      [ "date" => 1529366400, "title" => "Cuti Bersama Lebaran" ],
+      [ "date" => 1529452800, "title" => "Cuti Bersama Lebaran" ],
+      [ "date" => 1534464000, "title" => "Hari Kemerdekaan" ],
+      [ "date" => 1534896000, "title" => "Idul Adha" ],
+      [ "date" => 1536624000, "title" => "Tahun Baru Islam" ],
+      [ "date" => 1542672000, "title" => "Maulid Nabi Muhammad SAW" ],
+      [ "date" => 1545609600, "title" => "Cuti Bersama Hari Natal" ],
+      [ "date" => 1545696000, "title" => "Hari Natal" ]
+    ];
+  }
 
+  private function count_weekend($date_a, $date_b) {
+    $start = new \DateTime($date_a);
+    $end = new \DateTime($date_b);
+    $interval = new \DateInterval('P1D');
+    $end->add($interval);
+    $daterange = new \DatePeriod($start, $interval ,$end);
+    $weekends = 0;
+    foreach($daterange as $date){
+        $day = $date->format('N');
+        if ($day >= 6) {
+            $weekends++;
+        }
+    }
+    return $weekends;
   }
 
   public function create(Request $request)
@@ -144,7 +184,23 @@ class ReservationController extends Controller
     }
     // $reservation = Reservation::where('id',$reservation->id)->get();
     $_rooms = [];
-    // TODO: calculate total price
+
+    // Calculate Price
+
+    $price = 0;
+    $check_in = strtotime($reservation->check_in);
+    $check_out = strtotime($reservation->check_out);
+
+    $duration = ($check_out - $check_in)/86400; // in day(s)
+    $holiday_count = $this->count_weekend($reservation->check_in, $reservation->check_out);
+    foreach($this->holidays as $holiday)
+    {
+      if ($reservation->check_in <= $holiday["date"] && $holiday["date"] <= $reservation->check_out )
+      {
+        $holiday_count++;
+      }
+    }
+    // Extra Bed = 500.000
     foreach($reservation->rooms as $room)
     {
       $_rooms[] = [
@@ -154,6 +210,13 @@ class ReservationController extends Controller
         'price' => $room->type->price,
         'extra_bed' => $room->pivot->extra_bed
       ];
+      $price += $room->type->price * $duration;
+      if ($room->pivot->extra_bed)
+      {
+        $price += 50000 * $duration;
+      }
+
+      $price += 0.25 * $room->type->price * $holiday_count;
     }
 
     $response = [
@@ -165,7 +228,8 @@ class ReservationController extends Controller
       'check_out' => $reservation->check_out,
       'adult_capacity' => $reservation->adult_capacity,
       'children_capacity' => $reservation->children_capacity,
-      'rooms' => $_rooms
+      'rooms' => $_rooms,
+      'total_price' => $price
     ];
 
     return response()->json([
