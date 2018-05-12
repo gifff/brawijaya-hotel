@@ -240,15 +240,7 @@ class ReservationController extends Controller
   public function fetchAll()
   {
     $reservations = Reservation::all();
-    // $reservations = Reservation::where([
-    //   ['check_in', '>', date('Y-m-d')],
-    //   ['check_in', '<=', date('Y-m-d', time() + 2592000)]
-    // ])
-    // ->orWhere([
-    //   ['check_out', '>', date('Y-m-d')],
-    //   ['check_out', '<=', date('Y-m-d', time() + 2592000)]
-    // ])
-    // ->get();
+
     $resp = [];
     foreach($reservations as $reservation) {
       $rooms = [];
@@ -261,6 +253,7 @@ class ReservationController extends Controller
         ];
       }
       $resp[] = [
+        'id' => $reservation->id,
         'customer_name' => $reservation->customer_name,
         'customer_nin' => $reservation->customer_nin,
         'phone' => $reservation->phone,
@@ -274,11 +267,34 @@ class ReservationController extends Controller
     return response()->json($resp);
   }
 
-  public function fetchOne(Request $request, $id)
+  public function fetchOne(Request $request, $reservation_id)
   {
+    $reservation = Reservation::where("id", $reservation_id)->first();
+    if ($reservation == NULL)
+    {
+      return abort(404, "Reservation not found");
+    }
+    $rooms = [];
+    foreach($reservation->rooms as $room) {
+      $rooms[] = [
+        'name' => $room->name,
+        'type' => $room->type->name,
+        'price' => $room->type->price,
+        'extra_bed' => $room->pivot->extra_bed
+      ];
+    }
     return response()->json([
-      "message" => "Hello",
-      "id" => $id
+      'data' => [
+
+        'customer_name' => $reservation->customer_name,
+        'customer_nin' => $reservation->customer_nin,
+        'phone' => $reservation->phone,
+        'check_in' => $reservation->check_in,
+        'check_out' => $reservation->check_out,
+        'adult_capacity' => $reservation->adult_capacity,
+        'children_capacity' => $reservation->children_capacity,
+        'rooms' => $rooms
+      ]
     ]);
   }
 }

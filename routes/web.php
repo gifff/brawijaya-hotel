@@ -16,6 +16,7 @@ $router->get('/rooms', 'ExampleController@allRooms');
 $router->get('/test', 'ExampleController@testNotFound');
 
 $router->group(['prefix' => 'reservations'], function () use ($router) {
+  $router->get('/{reservation_id}', 'ReservationController@fetchOne');
   $router->get('/', 'ReservationController@fetchAll');
   $router->post('/', 'ReservationController@create');
   
