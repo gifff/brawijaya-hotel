@@ -25,11 +25,11 @@ Single Error:
 
 ```json
 {
-	"errors": [
-		{
-			"message": "Room not found"
-		}
-	]
+  "errors": [
+    {
+      "message": "Room not found"
+    }
+  ]
 }
 ```
 
@@ -37,40 +37,40 @@ Multiple Errors:
 
 ```json
 {
-	"errors": [
-		{
-			"field": "customer_name",
-			"message": "The customer name field is required."
-		},
-		{
-			"field": "customer_nin",
-			"message": "The customer nin field is required."
-		},
-		{
-			"field": "phone",
-			"message": "The phone field is required."
-		},
-		{
-			"field": "check_in",
-			"message": "The check in field is required."
-		},
-		{
-			"field": "check_out",
-			"message": "The check out field is required."
-		},
-		{
-			"field": "adult_capacity",
-			"message": "The adult capacity field is required."
-		},
-		{
-			"field": "children_capacity",
-			"message": "The children capacity field is required."
-		},
-		{
-			"field": "rooms",
-			"message": "The rooms field is required."
-		}
-	]
+  "errors": [
+    {
+      "field": "customer_name",
+      "message": "The customer name field is required."
+    },
+    {
+      "field": "customer_nin",
+      "message": "The customer nin field is required."
+    },
+    {
+      "field": "phone",
+      "message": "The phone field is required."
+    },
+    {
+      "field": "check_in",
+      "message": "The check in field is required."
+    },
+    {
+      "field": "check_out",
+      "message": "The check out field is required."
+    },
+    {
+      "field": "adult_capacity",
+      "message": "The adult capacity field is required."
+    },
+    {
+      "field": "children_capacity",
+      "message": "The children capacity field is required."
+    },
+    {
+      "field": "rooms",
+      "message": "The rooms field is required."
+    }
+  ]
 }
 ```
 
@@ -78,16 +78,16 @@ Errors with additional data through `value` field:
 
 ```json
 {
-	"errors": [
-		{
-			"message": "Some rooms are occupied",
-			"value": [
-				3,
-				9,
-				2
-			]
-		}
-	]
+  "errors": [
+    {
+      "message": "Some rooms are occupied",
+      "value": [
+        3,
+        9,
+        2
+      ]
+    }
+  ]
 }
 ```
 
@@ -109,24 +109,24 @@ None
 
 ```json
 {
-	"data": [
-		{
-			"date": "2018-01-01",
-			"title": "Tahun Baru Masehi"
-		},
-		{
-			"date": "2018-02-16",
-			"title": "Tahun Baru Imlek"
-		},
-		{
-			"date": "2018-03-17",
-			"title": "Hari Raya Nyepi"
-		},
-		{
-			"date": "2018-03-30",
-			"title": "Jumat Agung"
-		}
-	]
+  "data": [
+    {
+      "date": "2018-01-01",
+      "title": "Tahun Baru Masehi"
+    },
+    {
+      "date": "2018-02-16",
+      "title": "Tahun Baru Imlek"
+    },
+    {
+      "date": "2018-03-17",
+      "title": "Hari Raya Nyepi"
+    },
+    {
+      "date": "2018-03-30",
+      "title": "Jumat Agung"
+    }
+  ]
 }
 ```
 
@@ -148,28 +148,28 @@ None
 
 ```json
 {
-	"data": [
-		{
-			"name": "Audy",
-			"type": "Superior",
-			"price": 400000
-		},
-		{
-			"name": "Anggur",
-			"type": "Superior",
-			"price": 400000
-		},
-		{
-			"name": "Jeruk",
-			"type": "Deluxe",
-			"price": 600000
-		},
-		{
-			"name": "Nanas",
-			"type": "Deluxe",
-			"price": 600000
-		}
-	]
+  "data": [
+    {
+      "name": "Audy",
+      "type": "Superior",
+      "price": 400000
+    },
+    {
+      "name": "Anggur",
+      "type": "Superior",
+      "price": 400000
+    },
+    {
+      "name": "Jeruk",
+      "type": "Deluxe",
+      "price": 600000
+    },
+    {
+      "name": "Nanas",
+      "type": "Deluxe",
+      "price": 600000
+    }
+  ]
 }
 ```
 
@@ -191,12 +191,12 @@ Parameter | Type | Description
 
 ```json
 {
-	"data": {
-		"name": "Anggur",
-		"type": "Superior",
-		"price": 400000,
-		"holiday_price": 500000
-	}
+  "data": {
+    "name": "Anggur",
+    "type": "Superior",
+    "price": 400000,
+    "holiday_price": 500000
+  }
 }
 ```
 
@@ -218,56 +218,56 @@ NONE
 
 ```json
 {
-	"data": [
-		{
-			"id": 1,
-			"customer_name": "Tukiman A",
-			"customer_nin": "165150200111063",
-			"phone": "081213141516",
-			"check_in": "2018-05-21",
-			"check_out": "2018-05-24",
-			"adult_capacity": 6,
-			"children_capacity": 9,
-			"rooms": [
-				{
-					"name": "Melati",
-					"type": "Superior",
-					"price": 400000,
-					"extra_bed": 0
-				},
-				{
-					"name": "Nanas",
-					"type": "Deluxe",
-					"price": 600000,
-					"extra_bed": 1
-				}
-			]
-		},
-		{
-			"id": 2,
-			"customer_name": "Tukiman B",
-			"customer_nin": "165150200111064",
-			"phone": "081213141517",
-			"check_in": "2018-05-14",
-			"check_out": "2018-05-18",
-			"adult_capacity": 6,
-			"children_capacity": 1,
-			"rooms": [
-				{
-					"name": "Mandi Dalam",
-					"type": "Superior",
-					"price": 400000,
-					"extra_bed": 0
-				},
-				{
-					"name": "Melati",
-					"type": "Superior",
-					"price": 400000,
-					"extra_bed": 1
-				}
-			]
-		}
-	]
+  "data": [
+    {
+      "id": 1,
+      "customer_name": "Tukiman A",
+      "customer_nin": "165150200111063",
+      "phone": "081213141516",
+      "check_in": "2018-05-21",
+      "check_out": "2018-05-24",
+      "adult_capacity": 6,
+      "children_capacity": 9,
+      "rooms": [
+        {
+          "name": "Melati",
+          "type": "Superior",
+          "price": 400000,
+          "extra_bed": 0
+        },
+        {
+          "name": "Nanas",
+          "type": "Deluxe",
+          "price": 600000,
+          "extra_bed": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "customer_name": "Tukiman B",
+      "customer_nin": "165150200111064",
+      "phone": "081213141517",
+      "check_in": "2018-05-14",
+      "check_out": "2018-05-18",
+      "adult_capacity": 6,
+      "children_capacity": 1,
+      "rooms": [
+        {
+          "name": "Mandi Dalam",
+          "type": "Superior",
+          "price": 400000,
+          "extra_bed": 0
+        },
+        {
+          "name": "Melati",
+          "type": "Superior",
+          "price": 400000,
+          "extra_bed": 1
+        }
+      ]
+    }
+  ]
 }
 ```
 
@@ -290,29 +290,29 @@ Parameter | Type | Description
 
 ```json
 {
-	"data": {
-		"customer_name": "Tukiman B",
-		"customer_nin": "165150200111064",
-		"phone": "081213141517",
-		"check_in": "2018-05-14",
-		"check_out": "2018-05-18",
-		"adult_capacity": 6,
-		"children_capacity": 1,
-		"rooms": [
-			{
-				"name": "Mandi Dalam",
-				"type": "Superior",
-				"price": 400000,
-				"extra_bed": 0
-			},
-			{
-				"name": "Melati",
-				"type": "Superior",
-				"price": 400000,
-				"extra_bed": 1
-			}
-		]
-	}
+  "data": {
+    "customer_name": "Tukiman B",
+    "customer_nin": "165150200111064",
+    "phone": "081213141517",
+    "check_in": "2018-05-14",
+    "check_out": "2018-05-18",
+    "adult_capacity": 6,
+    "children_capacity": 1,
+    "rooms": [
+      {
+        "name": "Mandi Dalam",
+        "type": "Superior",
+        "price": 400000,
+        "extra_bed": 0
+      },
+      {
+        "name": "Melati",
+        "type": "Superior",
+        "price": 400000,
+        "extra_bed": 1
+      }
+    ]
+  }
 }
 ```
 
@@ -342,27 +342,27 @@ Parameter | Type | Description
 
 ```json
 {
-	"customer_name": "Tukiman C",
-	"customer_nin": "165150200111065",
-	"phone": "081213141518",
-	"check_in": "2018-06-09",
-	"check_out": "2018-06-12",
-	"adult_capacity": "6",
-	"children_capacity": "3",
-	"rooms": [
-		{
-			"id": 3,
-			"extra_bed": true
-		},
-		{
-			"id": 9,
-			"extra_bed": true
-		},
-		{
-			"id": 2,
-			"extra_bed": false
-		}
-	]
+  "customer_name": "Tukiman C",
+  "customer_nin": "165150200111065",
+  "phone": "081213141518",
+  "check_in": "2018-06-09",
+  "check_out": "2018-06-12",
+  "adult_capacity": "6",
+  "children_capacity": "3",
+  "rooms": [
+    {
+      "id": 3,
+      "extra_bed": true
+    },
+    {
+      "id": 9,
+      "extra_bed": true
+    },
+    {
+      "id": 2,
+      "extra_bed": false
+    }
+  ]
 }
 ```
 
@@ -370,40 +370,40 @@ Parameter | Type | Description
 
 ```json
 {
-	"data": {
-		"id": 6,
-		"customer_name": "Tukiman C",
-		"customer_nin": "165150200111065",
-		"phone": "081213141518",
-		"check_in": "2018-06-09",
-		"check_out": "2018-06-12",
-		"adult_capacity": "6",
-		"children_capacity": "3",
-		"rooms": [
-			{
-				"id": 2,
-				"name": "Mandi Luar",
-				"type": "Superior",
-				"price": 400000,
-				"extra_bed": 0
-			},
-			{
-				"id": 3,
-				"name": "Dahlia",
-				"type": "Superior",
-				"price": 400000,
-				"extra_bed": 1
-			},
-			{
-				"id": 9,
-				"name": "Jeruk",
-				"type": "Deluxe",
-				"price": 600000,
-				"extra_bed": 1
-			}
-		],
-		"total_price": 5200000
-	}
+  "data": {
+    "id": 6,
+    "customer_name": "Tukiman C",
+    "customer_nin": "165150200111065",
+    "phone": "081213141518",
+    "check_in": "2018-06-09",
+    "check_out": "2018-06-12",
+    "adult_capacity": "6",
+    "children_capacity": "3",
+    "rooms": [
+      {
+        "id": 2,
+        "name": "Mandi Luar",
+        "type": "Superior",
+        "price": 400000,
+        "extra_bed": 0
+      },
+      {
+        "id": 3,
+        "name": "Dahlia",
+        "type": "Superior",
+        "price": 400000,
+        "extra_bed": 1
+      },
+      {
+        "id": 9,
+        "name": "Jeruk",
+        "type": "Deluxe",
+        "price": 600000,
+        "extra_bed": 1
+      }
+    ],
+    "total_price": 5200000
+  }
 }
 ```
 
