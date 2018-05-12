@@ -12,8 +12,13 @@
 */
 
 $router->get('/', 'ExampleController@showVersion');
-$router->get('/rooms', 'ExampleController@allRooms');
-$router->get('/test', 'ExampleController@testNotFound');
+$router->get('/public_holidays', 'ReservationController@publicHoliday');
+
+$router->group(['prefix' => 'rooms'], function () use ($router) {
+  $router->get('/', 'RoomController@fetchAll');
+  $router->get('/{room_id}', 'RoomController@fetchOne');
+});
+
 
 $router->group(['prefix' => 'reservations'], function () use ($router) {
   $router->get('/{reservation_id}', 'ReservationController@fetchOne');

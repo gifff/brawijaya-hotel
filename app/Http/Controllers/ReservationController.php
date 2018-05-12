@@ -60,6 +60,21 @@ class ReservationController extends Controller
     return $weekends;
   }
 
+  public function publicHoliday(Request $request)
+  {
+    $resp = [];
+    foreach($this->holidays as $holiday) 
+    {
+      $resp[] = [
+        "date" => \strftime("%Y-%m-%d", $holiday['date']),
+        "title" => $holiday['title']
+      ];
+    }
+    return response()->json([
+      'data' => $resp
+    ]);
+  }
+
   public function create(Request $request)
   {
 
@@ -264,7 +279,9 @@ class ReservationController extends Controller
         'rooms' => $rooms
       ];
     }
-    return response()->json($resp);
+    return response()->json([
+      'data' => $resp
+    ]);
   }
 
   public function fetchOne(Request $request, $reservation_id)
@@ -285,7 +302,6 @@ class ReservationController extends Controller
     }
     return response()->json([
       'data' => [
-
         'customer_name' => $reservation->customer_name,
         'customer_nin' => $reservation->customer_nin,
         'phone' => $reservation->phone,
