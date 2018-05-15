@@ -259,6 +259,18 @@ class ReservationController extends Controller
     $resp = [];
     foreach($reservations as $reservation) {
       $rooms = [];
+      $price = 0;
+      $check_in = strtotime($reservation->check_in);
+      $check_out = strtotime($reservation->check_out);
+      $duration = ($check_out - $check_in)/86400; // in day(s)
+      $holiday_count = $this->count_weekend($reservation->check_in, $reservation->check_out);
+      foreach($this->holidays as $holiday)
+      {
+        if ($reservation->check_in <= $holiday["date"] && $holiday["date"] <= $reservation->check_out )
+        {
+          $holiday_count++;
+        }
+      }
       foreach($reservation->rooms as $room) {
         $rooms[] = [
           'name' => $room->name,
@@ -266,6 +278,13 @@ class ReservationController extends Controller
           'price' => $room->type->price,
           'extra_bed' => $room->pivot->extra_bed
         ];
+        $price += $room->type->price * $duration;
+        if ($room->pivot->extra_bed)
+        {
+          $price += 50000 * $duration;
+        }
+  
+        $price += 0.25 * $room->type->price * $holiday_count;
       }
       $resp[] = [
         'id' => $reservation->id,
@@ -276,7 +295,8 @@ class ReservationController extends Controller
         'check_out' => $reservation->check_out,
         'adult_capacity' => $reservation->adult_capacity,
         'children_capacity' => $reservation->children_capacity,
-        'rooms' => $rooms
+        'rooms' => $rooms,
+        'total_price' => $price
       ];
     }
     return response()->json([
@@ -292,6 +312,18 @@ class ReservationController extends Controller
       return abort(404, "Reservation not found");
     }
     $rooms = [];
+    $price = 0;
+      $check_in = strtotime($reservation->check_in);
+      $check_out = strtotime($reservation->check_out);
+      $duration = ($check_out - $check_in)/86400; // in day(s)
+      $holiday_count = $this->count_weekend($reservation->check_in, $reservation->check_out);
+      foreach($this->holidays as $holiday)
+      {
+        if ($reservation->check_in <= $holiday["date"] && $holiday["date"] <= $reservation->check_out )
+        {
+          $holiday_count++;
+        }
+      }
     foreach($reservation->rooms as $room) {
       $rooms[] = [
         'name' => $room->name,
@@ -299,6 +331,13 @@ class ReservationController extends Controller
         'price' => $room->type->price,
         'extra_bed' => $room->pivot->extra_bed
       ];
+      $price += $room->type->price * $duration;
+      if ($room->pivot->extra_bed)
+      {
+        $price += 50000 * $duration;
+      }
+
+      $price += 0.25 * $room->type->price * $holiday_count;
     }
     return response()->json([
       'data' => [
@@ -309,7 +348,8 @@ class ReservationController extends Controller
         'check_out' => $reservation->check_out,
         'adult_capacity' => $reservation->adult_capacity,
         'children_capacity' => $reservation->children_capacity,
-        'rooms' => $rooms
+        'rooms' => $rooms,
+        'total_price' => $price
       ]
     ]);
   }
