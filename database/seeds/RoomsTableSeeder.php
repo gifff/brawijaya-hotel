@@ -12,11 +12,19 @@ class RoomsTableSeeder extends Seeder
     public function run()
     {
         DB::table('rooms')->insert([
-            'name' => 'Mandi Dalam',
+            'name' => 'Orchid A',
             'type_id' => 1
         ]);
         DB::table('rooms')->insert([
-            'name' => 'Mandi Luar',
+            'name' => 'Orchid B',
+            'type_id' => 1
+        ]);
+        DB::table('rooms')->insert([
+            'name' => 'Daisy',
+            'type_id' => 1
+        ]);
+        DB::table('rooms')->insert([
+            'name' => 'Aster',
             'type_id' => 1
         ]);
         DB::table('rooms')->insert([
@@ -24,31 +32,23 @@ class RoomsTableSeeder extends Seeder
             'type_id' => 1
         ]);
         DB::table('rooms')->insert([
-            'name' => 'Beef',
+            'name' => 'Edelweiss',
             'type_id' => 1
         ]);
         DB::table('rooms')->insert([
-            'name' => 'Melati',
+            'name' => 'Lavender',
             'type_id' => 1
         ]);
         DB::table('rooms')->insert([
-            'name' => 'Mawar',
+            'name' => 'Lily',
             'type_id' => 1
         ]);
         DB::table('rooms')->insert([
-            'name' => 'Audy',
-            'type_id' => 1
-        ]);
-        DB::table('rooms')->insert([
-            'name' => 'Anggur',
-            'type_id' => 1
-        ]);
-        DB::table('rooms')->insert([
-            'name' => 'Jeruk',
+            'name' => 'Rose',
             'type_id' => 2
         ]);
         DB::table('rooms')->insert([
-            'name' => 'Nanas',
+            'name' => 'Sunflower',
             'type_id' => 2
         ]);
     }
